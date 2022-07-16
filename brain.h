@@ -11,29 +11,29 @@ public:
     brain_t(std::string filename);
     ~brain_t();
     void draw();
-    void save(std::string filename)
+    void save(std::string filename);
     void pause();
     void start();
 private:
     void compute_locations();
     std::vector<node_t*> neurons;
     void gajer_et_al();
-}
+};
 
-struct {
+struct fire_t {
     node_t* source;
     node_t* destination;
-} fire_t;
+};
 
 class simulator_t {
-    static int MAX_TIME = 800;
+    static const int MAX_TIME = 800;
     int current_time;
     std::vector<fire_t> future_task;
     void add(fire_t connection, int time);
     void increment();
-}
+};
 
-void compute_locations() {
+void brain_t::compute_locations() {
     /* Need to decide how to place the neurons for drawings.
 
     May want to recompute during the simulation as well.
