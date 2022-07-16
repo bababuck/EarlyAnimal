@@ -20,6 +20,19 @@ private:
     void gajer_et_al();
 }
 
+struct {
+    node_t* source;
+    node_t* destination;
+} fire_t;
+
+class simulator_t {
+    static int MAX_TIME = 800;
+    int current_time;
+    std::vector<fire_t> future_task;
+    void add(fire_t connection, int time);
+    void increment();
+}
+
 void compute_locations() {
     /* Need to decide how to place the neurons for drawings.
 
@@ -40,5 +53,5 @@ void brain_t::gajer_et_al() {
     /* Implemention of the gajer_et_al algorithm, as found here:
     https://cs.brown.edu/people/rtamassi/gdhandbook/chapters/force-directed.pdf
     */
-   
+
 }
