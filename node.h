@@ -6,24 +6,29 @@ Want to track the recent contributions before firing. If one input gives a lot o
 
 typedef connection_t;
 typedef std::pair<int, int> coordinate_t;
+typedef int32_t voltage_t;
 
 class node_t {
 public:
     node_t();
     ~node_t();
-    void add_connection(connection_t* connection);
+    void add_connection(connection_t connection);
     bool sample();
 private:
+    int fire_time;
     coordinate_t location;
-    std::vector<connection_t*> axon_connections;
+    std::vector<connection_t> axon_connections;
     void fire();
+    void recieve(voltage_t volts);
     void draw();
-    void draw_connection(coordinate_t destination); 
+    void draw_connection(coordinate_t destination);
+    float get_size();
 
     static int COOLDOWN_LENGTH;
     int cooldown_time_remaining;
-    static int THRESHOLD;
-    int potential;
+    const static int THRESHOLD = 100;
+    const static int DISTANCE = 5;
+    voltage_t potential;
     int id; // For saving state
 };
 
@@ -32,6 +37,6 @@ class pacemaker_node_t : node_t {
 };
 
 struct connection_t {
-    int weight;
+    voltage_t weight;
     node_t* towards;
 };

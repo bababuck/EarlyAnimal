@@ -23,13 +23,15 @@ private:
 struct fire_t {
     node_t* source;
     node_t* destination;
+    voltage_t weight;
+    fire_t(node_t* _source, node_t* _destination, voltage_t _weight):source(_source), destination(_destination), weight(_weight){}
 };
 
 class simulator_t {
     static const int MAX_TIME = 800;
     int current_time;
     std::vector<fire_t> future_task;
-    void add(fire_t connection, int time);
+    void add_fire(fire_t connection, int distance);
     void increment();
 };
 
